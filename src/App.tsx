@@ -3,10 +3,10 @@ import classes from './config/classes'
 import thresholds from './config/thresholds'
 import './App.css'
 
-function calculateCost(stat: number) {
+function calculateCost(current: number, goal: number) {
   let cost = 0
 
-  for (let c = 1; c < stat; c++) {
+  for (let c = current; c < goal; c++) {
     if (c <= 99) {
       cost += Math.floor((c - 1) / 10) + 2
     } else {
@@ -33,12 +33,12 @@ function App() {
   useEffect(() => {
     let newPoints = maxPoints - (isTranscended ? 0 : 52)
     
-    newPoints -= calculateCost(str)
-    newPoints -= calculateCost(agi)
-    newPoints -= calculateCost(vit)
-    newPoints -= calculateCost(int)
-    newPoints -= calculateCost(dex)
-    newPoints -= calculateCost(luk)
+    newPoints -= calculateCost(1, str)
+    newPoints -= calculateCost(1, agi)
+    newPoints -= calculateCost(1, vit)
+    newPoints -= calculateCost(1, int)
+    newPoints -= calculateCost(1, dex)
+    newPoints -= calculateCost(1, luk)
 
     setPoints(newPoints)
   }, [maxPoints, isTranscended, str, agi, vit, int, dex, luk])
@@ -126,26 +126,32 @@ function App() {
       <br />
       <label htmlFor="strStatInput">STR:</label>
       <input type="number" min="1" value={str} max={maxStats} id="strStatInput" onChange={strOnChange} />
+      <span>{calculateCost(str, str + 1)}</span>
       <span> + {jobBonus.str}</span>
       <br />
       <label htmlFor="agiStatInput">AGI:</label>
       <input type="number" min="1" value={agi} max={maxStats} id="agiStatInput" onChange={agiOnChange} />
+      <span>{calculateCost(agi, agi + 1)}</span>
       <span> + {jobBonus.agi}</span>
       <br />
       <label htmlFor="vitStatInput">VIT:</label>
       <input type="number" min="1" value={vit} max={maxStats} id="vitStatInput" onChange={vitOnChange} />
+      <span>{calculateCost(vit, vit + 1)}</span>
       <span> + {jobBonus.vit}</span>
       <br />
       <label htmlFor="intStatInput">INT:</label>
       <input type="number" min="1" value={int} max={maxStats} id="intStatInput" onChange={intOnChange} />
+      <span>{calculateCost(int, int + 1)}</span>
       <span> + {jobBonus.int}</span>
       <br />
       <label htmlFor="dexStatInput">DEX:</label>
       <input type="number" min="1" value={dex} max={maxStats} id="dexStatInput" onChange={dexOnChange} />
+      <span>{calculateCost(dex, dex + 1)}</span>
       <span> + {jobBonus.dex}</span>
       <br />
       <label htmlFor="lukStatInput">LUK:</label>
       <input type="number" min="1" value={luk} max={maxStats} id="lukStatInput" onChange={lukOnChange} />
+      <span>{calculateCost(luk, luk + 1)}</span>
       <span> + {jobBonus.luk}</span>
       <br />
       <span>Available points: {points}</span>
