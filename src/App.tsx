@@ -99,62 +99,140 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <label htmlFor="classSelector">Choose your Class:</label>
-      <select id="classSelector" onChange={classOnChange}>
-        {
-          classes.map((cl, i) => (
-            <option value={i} key={cl.name}>{cl.name}</option>
-          ))
-        }
-      </select>
+    <div className="box">
+      <h1>STAT CALCULATOR</h1>
+
+      <div className="row">
+
+        <div className="col s60">
+          <label htmlFor="classSelector">Choose your Class:</label>
+          <select id="classSelector" onChange={classOnChange}>
+            {
+              classes.map((cl, i) => (
+                <option value={i} key={cl.name}>{cl.name}</option>
+              ))
+            }
+          </select>
+        </div>
+
+        <div className="col s20">
+          <label htmlFor="levelelector">Level:</label>
+          <select id="levelelector" onChange={levelOnChange}>
+            {
+              thresholds.map(th => (
+                <option value={th.points} key={th.level}>{th.level}</option>
+              ))
+            }
+          </select>
+        </div>
+
+        <div className="col s20">
+          <label htmlFor="babyelector">Baby?:</label>
+          <select id="babySelector" onChange={babyOnChange}>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+          </select>
+        </div>
+
+      </div>
+
       <br />
-      <label htmlFor="levelelector">Level Range:</label>
-      <select id="levelelector" onChange={levelOnChange}>
-        {
-          thresholds.map(th => (
-            <option value={th.points} key={th.level}>{th.level}</option>
-          ))
-        }
-      </select>
-      <br />
-      <label htmlFor="babyelector">Baby?:</label>
-      <select id="babySelector" onChange={babyOnChange}>
-          <option value="false">No</option>
-          <option value="true">Yes</option>
-      </select>
-      <br />
-      <label htmlFor="strStatInput">STR:</label>
-      <input type="number" min="1" value={str} max={maxStats} id="strStatInput" onChange={strOnChange} />
-      <span>{calculateCost(str, str + 1)}</span>
-      <span> + {jobBonus.str}</span>
-      <br />
-      <label htmlFor="agiStatInput">AGI:</label>
-      <input type="number" min="1" value={agi} max={maxStats} id="agiStatInput" onChange={agiOnChange} />
-      <span>{calculateCost(agi, agi + 1)}</span>
-      <span> + {jobBonus.agi}</span>
-      <br />
-      <label htmlFor="vitStatInput">VIT:</label>
-      <input type="number" min="1" value={vit} max={maxStats} id="vitStatInput" onChange={vitOnChange} />
-      <span>{calculateCost(vit, vit + 1)}</span>
-      <span> + {jobBonus.vit}</span>
-      <br />
-      <label htmlFor="intStatInput">INT:</label>
-      <input type="number" min="1" value={int} max={maxStats} id="intStatInput" onChange={intOnChange} />
-      <span>{calculateCost(int, int + 1)}</span>
-      <span> + {jobBonus.int}</span>
-      <br />
-      <label htmlFor="dexStatInput">DEX:</label>
-      <input type="number" min="1" value={dex} max={maxStats} id="dexStatInput" onChange={dexOnChange} />
-      <span>{calculateCost(dex, dex + 1)}</span>
-      <span> + {jobBonus.dex}</span>
-      <br />
-      <label htmlFor="lukStatInput">LUK:</label>
-      <input type="number" min="1" value={luk} max={maxStats} id="lukStatInput" onChange={lukOnChange} />
-      <span>{calculateCost(luk, luk + 1)}</span>
-      <span> + {jobBonus.luk}</span>
-      <br />
-      <span>Available points: {points}</span>
+
+      <div className="row">
+        <div className="col s50 align-top">
+
+          <div className="row">
+            <div className="col s25">
+              <label htmlFor="strStatInput">STR:</label>
+            </div>
+            <div className="col s85 stat-input-group">
+              <input type="number" min="1" value={str} max={maxStats} id="strStatInput" onChange={strOnChange} />
+              <button className="subtract" onClick={() => setStr(Math.max(str - 1, 1))}>◀</button>
+              <button className="add" onClick={() => setStr(Math.min(str + 1, maxStats))}>▶</button>
+              <span className="job-bonus"> + {jobBonus.str}</span>
+              <span className="add-cost">{calculateCost(str, str + 1)}</span>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col s25">
+              <label htmlFor="agiStatInput">AGI:</label>
+            </div>
+            <div className="col s85 stat-input-group">
+              <input type="number" min="1" value={agi} max={maxStats} id="agiStatInput" onChange={agiOnChange} />
+              <button className="subtract" onClick={() => setAgi(Math.max(agi - 1, 1))}>◀</button>
+              <button className="add" onClick={() => setAgi(Math.min(agi + 1, maxStats))}>▶</button>
+              <span className="job-bonus"> + {jobBonus.agi}</span>
+              <span className="add-cost">{calculateCost(agi, agi + 1)}</span>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col s25">
+              <label htmlFor="vitStatInput">VIT:</label>
+            </div>
+            <div className="col s85 stat-input-group">
+              <input type="number" min="1" value={vit} max={maxStats} id="vitStatInput" onChange={vitOnChange} />
+              <button className="subtract" onClick={() => setVit(Math.max(vit - 1, 1))}>◀</button>
+              <button className="add" onClick={() => setVit(Math.min(vit + 1, maxStats))}>▶</button>
+              <span className="job-bonus"> + {jobBonus.vit}</span>
+              <span className="add-cost">{calculateCost(vit, vit + 1)}</span>
+            </div>
+          </div>
+
+        </div>
+        <div className="col s50">
+
+          <div className="row">
+            <div className="col s25">
+              <label htmlFor="intStatInput">INT:</label>
+            </div>
+            <div className="col s85 stat-input-group">
+              <input type="number" min="1" value={int} max={maxStats} id="intStatInput" onChange={intOnChange} />
+              <button className="subtract" onClick={() => setInt(Math.max(int - 1, 1))}>◀</button>
+              <button className="add" onClick={() => setInt(Math.min(int + 1, maxStats))}>▶</button>
+              <span className="job-bonus"> + {jobBonus.int}</span>
+              <span className="add-cost">{calculateCost(int, int + 1)}</span>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col s25">
+              <label htmlFor="dexStatInput">DEX:</label>
+            </div>
+            <div className="col s85 stat-input-group">
+              <input type="number" min="1" value={dex} max={maxStats} id="dexStatInput" onChange={dexOnChange} />
+              <button className="subtract" onClick={() => setDex(Math.max(dex - 1, 1))}>◀</button>
+              <button className="add" onClick={() => setDex(Math.min(dex + 1, maxStats))}>▶</button>
+              <span className="job-bonus"> +{jobBonus.dex}</span>
+              <span className="add-cost">{calculateCost(dex, dex + 1)}</span>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col s25">
+              <label htmlFor="lukStatInput">LUK:</label>
+            </div>
+            <div className="col s85 stat-input-group">
+              <input type="number" min="1" value={luk} max={maxStats} id="lukStatInput" onChange={lukOnChange} />
+              <button className="subtract" onClick={() => setLuk(Math.max(luk - 1, 1))}>◀</button>
+              <button className="add" onClick={() => setLuk(Math.min(luk + 1, maxStats))}>▶</button>
+              <span className="job-bonus"> +{jobBonus.luk}</span>
+              <span className="add-cost">{calculateCost(luk, luk + 1)}</span>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col s50">
+              <label htmlFor="statPoints">Available points:</label>
+            </div>
+            <div className="col s50">
+              <input type="text" value={points} disabled />
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   )
 }
