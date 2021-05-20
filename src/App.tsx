@@ -145,12 +145,12 @@ function App() {
             <div className="col s25">
               <label htmlFor="strStatInput">STR:</label>
             </div>
-            <div className="col s85 stat-input-group">
+            <div className="col s75 stat-input-group">
               <input type="number" min="1" value={str} max={maxStats} id="strStatInput" onChange={strOnChange} />
               <button className="subtract" onClick={() => setStr(Math.max(str - 1, 1))}>◀</button>
               <button className="add" onClick={() => setStr(Math.min(str + 1, maxStats))}>▶</button>
-              <span className="job-bonus"> + {jobBonus.str}</span>
-              <span className="add-cost">{calculateCost(str, str + 1)}</span>
+              <span className="job-bonus"> +{jobBonus.str}</span>
+              <span className="add-cost">{str === maxStats ? '-' : calculateCost(str, str + 1)}</span>
             </div>
           </div>
 
@@ -158,12 +158,12 @@ function App() {
             <div className="col s25">
               <label htmlFor="agiStatInput">AGI:</label>
             </div>
-            <div className="col s85 stat-input-group">
+            <div className="col s75 stat-input-group">
               <input type="number" min="1" value={agi} max={maxStats} id="agiStatInput" onChange={agiOnChange} />
               <button className="subtract" onClick={() => setAgi(Math.max(agi - 1, 1))}>◀</button>
               <button className="add" onClick={() => setAgi(Math.min(agi + 1, maxStats))}>▶</button>
-              <span className="job-bonus"> + {jobBonus.agi}</span>
-              <span className="add-cost">{calculateCost(agi, agi + 1)}</span>
+              <span className="job-bonus"> +{jobBonus.agi}</span>
+              <span className="add-cost">{agi === maxStats ? '-' : calculateCost(agi, agi + 1)}</span>
             </div>
           </div>
 
@@ -171,12 +171,12 @@ function App() {
             <div className="col s25">
               <label htmlFor="vitStatInput">VIT:</label>
             </div>
-            <div className="col s85 stat-input-group">
+            <div className="col s75 stat-input-group">
               <input type="number" min="1" value={vit} max={maxStats} id="vitStatInput" onChange={vitOnChange} />
               <button className="subtract" onClick={() => setVit(Math.max(vit - 1, 1))}>◀</button>
               <button className="add" onClick={() => setVit(Math.min(vit + 1, maxStats))}>▶</button>
-              <span className="job-bonus"> + {jobBonus.vit}</span>
-              <span className="add-cost">{calculateCost(vit, vit + 1)}</span>
+              <span className="job-bonus"> +{jobBonus.vit}</span>
+              <span className="add-cost">{vit === maxStats ? '-' : calculateCost(vit, vit + 1)}</span>
             </div>
           </div>
 
@@ -187,12 +187,12 @@ function App() {
             <div className="col s25">
               <label htmlFor="intStatInput">INT:</label>
             </div>
-            <div className="col s85 stat-input-group">
+            <div className="col s75 stat-input-group">
               <input type="number" min="1" value={int} max={maxStats} id="intStatInput" onChange={intOnChange} />
               <button className="subtract" onClick={() => setInt(Math.max(int - 1, 1))}>◀</button>
               <button className="add" onClick={() => setInt(Math.min(int + 1, maxStats))}>▶</button>
-              <span className="job-bonus"> + {jobBonus.int}</span>
-              <span className="add-cost">{calculateCost(int, int + 1)}</span>
+              <span className="job-bonus"> +{jobBonus.int}</span>
+              <span className="add-cost">{int === maxStats ? '-' : calculateCost(int, int + 1)}</span>
             </div>
           </div>
 
@@ -200,12 +200,12 @@ function App() {
             <div className="col s25">
               <label htmlFor="dexStatInput">DEX:</label>
             </div>
-            <div className="col s85 stat-input-group">
+            <div className="col s75 stat-input-group">
               <input type="number" min="1" value={dex} max={maxStats} id="dexStatInput" onChange={dexOnChange} />
               <button className="subtract" onClick={() => setDex(Math.max(dex - 1, 1))}>◀</button>
               <button className="add" onClick={() => setDex(Math.min(dex + 1, maxStats))}>▶</button>
               <span className="job-bonus"> +{jobBonus.dex}</span>
-              <span className="add-cost">{calculateCost(dex, dex + 1)}</span>
+              <span className="add-cost">{dex === maxStats ? '-' : calculateCost(dex, dex + 1)}</span>
             </div>
           </div>
 
@@ -213,20 +213,20 @@ function App() {
             <div className="col s25">
               <label htmlFor="lukStatInput">LUK:</label>
             </div>
-            <div className="col s85 stat-input-group">
+            <div className="col s75 stat-input-group">
               <input type="number" min="1" value={luk} max={maxStats} id="lukStatInput" onChange={lukOnChange} />
               <button className="subtract" onClick={() => setLuk(Math.max(luk - 1, 1))}>◀</button>
               <button className="add" onClick={() => setLuk(Math.min(luk + 1, maxStats))}>▶</button>
               <span className="job-bonus"> +{jobBonus.luk}</span>
-              <span className="add-cost">{calculateCost(luk, luk + 1)}</span>
+              <span className="add-cost">{luk === maxStats ? '-' : calculateCost(luk, luk + 1)}</span>
             </div>
           </div>
 
           <div className="row">
-            <div className="col s50">
+            <div className="col s60">
               <label htmlFor="statPoints">Available points:</label>
             </div>
-            <div className="col s50">
+            <div className="col s40">
               <input type="text" value={points} disabled />
             </div>
           </div>
