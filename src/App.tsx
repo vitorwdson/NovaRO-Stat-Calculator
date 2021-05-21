@@ -22,8 +22,8 @@ function App() {
     // Initializes the new points variable with the amount based on the
     let newPoints = maxPoints
 
-    // Checks if the character is trancended and, if so, subtract 52 points
-    if (isTranscended)
+    // Checks if the character is not trancended and, if so, subtract 52 points
+    if (!isTranscended)
       newPoints -= 52
     
     // Subtract the cost related to the amount of STR from the available points
